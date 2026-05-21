@@ -22,6 +22,39 @@
       color: #222;
     }
 
+    .inapp-banner {
+      display: none;
+      width: 100%;
+      max-width: 560px;
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .inapp-banner strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+    }
+
+    .inapp-banner .open-btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 8px 20px;
+      background: #4a90e2;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+    }
+
     h1 {
       font-size: 1.5rem;
       font-weight: 700;
@@ -149,6 +182,13 @@
 </head>
 <body>
 
+  <div class="inapp-banner" id="inappBanner">
+    <strong>⚠️ 카카오톡 / 인앱 브라우저에서는 다운로드가 제한됩니다</strong>
+    아래 버튼을 눌러 Chrome 또는 기본 브라우저에서 열어주세요.
+    <br />
+    <button class="open-btn" onclick="openInBrowser()">Chrome으로 열기</button>
+  </div>
+
   <h1>악보 배경 흰색 채우기</h1>
   <p class="subtitle">누끼 이미지를 업로드하면 배경을 흰색으로 채워 다운로드할 수 있어요.<br>모든 처리는 브라우저에서만 이루어지며 서버로 전송되지 않습니다.</p>
 
@@ -174,6 +214,25 @@
   <canvas id="canvas"></canvas>
 
   <script>
+    // 인앱 브라우저 감지 (카카오톡, 라인, 인스타, 페북 등 WebView)
+    const ua = navigator.userAgent;
+    const isInApp = /KAKAOTALK|NAVER|Line\/|Instagram|FBAV|FBAN|Twitter/i.test(ua) ||
+                    (ua.includes('Android') && /wv\b/.test(ua));
+
+    if (isInApp) {
+      document.getElementById('inappBanner').style.display = 'block';
+    }
+
+    function openInBrowser() {
+      const url = location.href;
+      // Android intent scheme으로 Chrome 강제 실행 시도
+      const intentUrl = 'intent://' + url.replace(/^https?:\/\//, '') +
+        '#Intent;scheme=https;package=com.android.chrome;end';
+      location.href = intentUrl;
+      // 실패 시(Chrome 미설치 등) 잠깐 후 그냥 새 탭으로
+      setTimeout(() => { window.open(url, '_blank'); }, 1500);
+    }
+
     const dropZone = document.getElementById('dropZone');
     const fileInput = document.getElementById('fileInput');
     const canvas = document.getElementById('canvas');
