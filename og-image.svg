@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0f7ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8f5e9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Card -->
+  <rect x="80" y="80" width="1040" height="470" rx="32" fill="#ffffff" filter="url(#shadow)"/>
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="24" flood-color="#00000018"/>
+    </filter>
+  </defs>
+
+  <!-- Icon area -->
+  <rect x="80" y="80" width="180" height="470" rx="32" fill="#4a90e2"/>
+  <rect x="200" y="80" width="20" height="470" fill="#4a90e2"/>
+  <!-- Music note -->
+  <text x="170" y="400" font-size="100" text-anchor="middle" fill="white" font-family="serif">♩</text>
+
+  <!-- Title -->
+  <text x="300" y="230" font-size="64" font-weight="bold" fill="#1a1a1a" font-family="-apple-system, sans-serif">악보 배경 흰색 채우기</text>
+
+  <!-- Divider -->
+  <rect x="300" y="268" width="480" height="4" rx="2" fill="#4a90e2"/>
+
+  <!-- Description -->
+  <text x="300" y="340" font-size="36" fill="#555" font-family="-apple-system, sans-serif">누끼 이미지의 배경을 흰색으로 채워</text>
+  <text x="300" y="390" font-size="36" fill="#555" font-family="-apple-system, sans-serif">깔끔하게 저장하세요</text>
+
+  <!-- Tag -->
+  <rect x="300" y="440" width="200" height="52" rx="26" fill="#e8f5e9"/>
+  <text x="400" y="474" font-size="26" fill="#27ae60" text-anchor="middle" font-family="-apple-system, sans-serif" font-weight="600">무료 · 무설치</text>
+
+  <rect x="520" y="440" width="220" height="52" rx="26" fill="#f0f7ff"/>
+  <text x="630" y="474" font-size="26" fill="#4a90e2" text-anchor="middle" font-family="-apple-system, sans-serif" font-weight="600">브라우저에서 실행</text>
+</svg>
