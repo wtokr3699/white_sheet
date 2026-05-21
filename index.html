@@ -168,7 +168,7 @@
       <img id="previewImg" src="" alt="결과 미리보기" />
     </div>
     <p class="info" id="infoText"></p>
-    <a class="btn download" id="downloadBtn" download>다운로드</a>
+    <button class="btn download" id="downloadBtn">다운로드</button>
   </div>
 
   <canvas id="canvas"></canvas>
@@ -249,11 +249,29 @@
             // 미리보기
             previewImg.src = url;
 
-            // 다운로드 파일명: 원본이름_white.ext
             const baseName = file.name.replace(/\.[^/.]+$/, '');
             const outName = `${baseName}_white.${ext}`;
-            downloadBtn.href = url;
-            downloadBtn.download = outName;
+
+            downloadBtn.onclick = async () => {
+              // iOS Safari 등 모바일: Web Share API로 공유/저장
+              if (navigator.share && navigator.canShare) {
+                const shareFile = new File([blob], outName, { type: mimeType });
+                if (navigator.canShare({ files: [shareFile] })) {
+                  try {
+                    await navigator.share({ files: [shareFile], title: outName });
+                    return;
+                  } catch (e) {
+                    if (e.name === 'AbortError') return;
+                  }
+                }
+              }
+              // 데스크탑 / Android Chrome: a[download] 방식
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = outName;
+              a.click();
+            };
+
             downloadBtn.textContent = `다운로드 (${outName})`;
 
             const kb = (blob.size / 1024).toFixed(1);
